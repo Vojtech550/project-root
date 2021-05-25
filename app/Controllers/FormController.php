@@ -16,7 +16,9 @@ class FormController extends Controller
         $input = $this->validate([
             'name' => 'required|min_length[3]',
             'email' => 'required|valid_email',
-            'phone' => 'required|numeric|max_length[10]'
+            'phone' => 'required|numeric|max_length[9]',
+            'gender' => 'required',
+            'fav_colour' => 'required|min_length[3]'
         ]);
 
         $formModel = new FormModel();
@@ -30,9 +32,11 @@ class FormController extends Controller
                 'name' => $this->request->getVar('name'),
                 'email'  => $this->request->getVar('email'),
                 'phone'  => $this->request->getVar('phone'),
+                'gender'  => $this->request->getVar('gender'),
+                'fav_colour' => $this->request->getVar('fav_colour')
             ]);          
-
-            return $this->response->redirect(site_url('/submit-form'));
+            echo view('submit_success');
+            //return $this->response->redirect(site_url('/submit_success'));
         }
     }
 
